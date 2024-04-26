@@ -6,7 +6,7 @@ var menuLinks = [
     { text: 'account', href: '/account' },
 ];
 
-// Part 1: Getting Started
+
 // Select and cache the <main> element in a variable named mainEl.
 const mainEl = document.querySelector("main");
 // Set the background color of mainEl to the value stored in the --main-bg CSS custom property.
@@ -17,7 +17,7 @@ mainEl.innerHTML = "<h1>DOM Manipulation</h1>";
 mainEl.classList.add("flex-ctr");
 
 
-// Part 2: Creating a Menu Bar
+
 // Select and cache the <nav id="top-menu"> element in a variable named topMenuEl.
 const topMenuEl = document.querySelector("nav");
 // Set the height of the topMenuEl element to be 100%.
@@ -27,7 +27,7 @@ topMenuEl.style.background = "var(--top-menu-bg)";
 // Add a class of flex-around to topMenuEl.
 topMenuEl.classList.add('flex-around');
 
-// Part 3: Adding Menu Buttons
+
 // Iterate over the entire menuLinks array and for each "link" object:
 for(i = 0; i < menuLinks.length; i++){
     // Create an <a> element.
@@ -40,3 +40,16 @@ for(i = 0; i < menuLinks.length; i++){
     topMenuEl.appendChild(a);
 }
 
+// Part 3: Creating the Submenu
+//Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.
+const subMenuEl = document.getElementById("sub-menu");
+// set height to 100%
+subMenuEl.style.height = "100%";
+// set background color 
+subMenuEl.style.backgroundColor = "var(--sub-menu-bg)";
+// add flex-around
+subMenuEl.classList.add('flex-around');
+// make position absolute
+subMenuEl.style.position = "absolute";
+// set css property to 0 for sub menu for now.
+subMenuEl.style.top = "0"
