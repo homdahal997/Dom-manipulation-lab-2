@@ -83,9 +83,8 @@ topMenuEl.addEventListener("click", function(e){
     }
     // Remove active class from all links
     topMenuLinks.forEach((link) => link.classList.remove('active'));
-
     // Add active class to clicked link
     e.target.classList.add('active');
 
-
+    //Part 5: Adding Submenu Interaction
 });
