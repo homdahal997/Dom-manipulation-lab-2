@@ -1,11 +1,27 @@
 // Menu data structure
 var menuLinks = [
     { text: 'about', href: '/about' },
-    { text: 'catalog', href: '/catalog' },
-    { text: 'orders', href: '/orders' },
-    { text: 'account', href: '/account' },
+    {
+        text: 'catalog', href: '#', subLinks: [
+            { text: 'all', href: '/catalog/all' },
+            { text: 'top selling', href: '/catalog/top' },
+            { text: 'search', href: '/catalog/search' },
+        ]
+    },
+    {
+        text: 'orders', href: '#', subLinks: [
+            { text: 'new', href: '/orders/new' },
+            { text: 'pending', href: '/orders/pending' },
+            { text: 'history', href: '/orders/history' },
+        ]
+    },
+    {
+        text: 'account', href: '#', subLinks: [
+            { text: 'profile', href: '/account/profile' },
+            { text: 'sign out', href: '/account/signout' },
+        ]
+    },
 ];
-
 
 // Select and cache the <main> element in a variable named mainEl.
 const mainEl = document.querySelector("main");
@@ -29,7 +45,7 @@ topMenuEl.classList.add('flex-around');
 
 
 // Iterate over the entire menuLinks array and for each "link" object:
-for(i = 0; i < menuLinks.length; i++){
+for (i = 0; i < menuLinks.length; i++) {
     // Create an <a> element.
     const a = document.createElement("a");
     // On the new element, add an href attribute with its value set to the href property of the "link" object.
@@ -53,3 +69,23 @@ subMenuEl.classList.add('flex-around');
 subMenuEl.style.position = "absolute";
 // set css property to 0 for sub menu for now.
 subMenuEl.style.top = "0"
+
+// Part 4: Adding Menu Interaction
+//Select and cache the all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.
+const topMenuLinks = topMenuEl.querySelectorAll("a");
+// Attach a delegated 'click' event listener to topMenuEl.
+topMenuEl.addEventListener("click", function(e){
+    // preventdefault method of event object called
+    e.preventDefault();
+    // return if clicked element is not "a"
+    if(!e.target.matches("a")){
+        return;
+    }
+    // Remove active class from all links
+    topMenuLinks.forEach((link) => link.classList.remove('active'));
+
+    // Add active class to clicked link
+    e.target.classList.add('active');
+
+
+});
