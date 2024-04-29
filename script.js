@@ -64,27 +64,63 @@ subMenuEl.style.height = "100%";
 // set background color 
 subMenuEl.style.backgroundColor = "var(--sub-menu-bg)";
 // add flex-around
-subMenuEl.classList.add('flex-around');
+subMenuEl.classList.add("flex-around");
 // make position absolute
 subMenuEl.style.position = "absolute";
 // set css property to 0 for sub menu for now.
-subMenuEl.style.top = "0"
+subMenuEl.style.top = "0";
 
 // Part 4: Adding Menu Interaction
 //Select and cache the all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.
 const topMenuLinks = topMenuEl.querySelectorAll("a");
 // Attach a delegated 'click' event listener to topMenuEl.
-topMenuEl.addEventListener("click", function(e){
+topMenuEl.addEventListener("click", function(evt){
     // preventdefault method of event object called
-    e.preventDefault();
+    evt.preventDefault();
     // return if clicked element is not "a"
-    if(!e.target.matches("a")){
+    if(!evt.target.matches("a")){
         return;
     }
+    const linkClicked = evt.target;
     // Remove active class from all links
     topMenuLinks.forEach((link) => link.classList.remove('active'));
     // Add active class to clicked link
-    e.target.classList.add('active');
+    linkClicked.classList.toggle('active');
 
     //Part 5: Adding Submenu Interaction
+
+    /**
+     * If the clicked <a> element's "link" object within menuLinks has a subLinks property (all do, except for the "link" object for ABOUT), set the CSS top property of subMenuEl to 100%.
+    Otherwise, set the CSS top property of subMenuEl to 0.
+    Hint: Caching the "link" object will come in handy for passing its subLinks array later.
+     */
+    // using an array method to search through menulinks that returns first element ( link object)
+    const linkClickedObj = menuLinks.find((obj => obj.text === linkClicked.textContent));
+
+    if(linkClickedObj && linkClickedObj.subLinks){
+        subMenuEl.style.top = "100%";
+    }
+
+
 });
+
+// Helper function to build submenu
+function buildSubmenu(subLinks) {
+    // Clear the current contents of subMenuEl.
+    subMenuEl.innerHTML = '';
+
+    // Iterate over the subLinks array
+    subLinks.forEach(link => {
+        // Create an <a> element.
+        const a = document.createElement('a');
+
+        // Add an href attribute to the <a>, with the value set by the href property of the "link" object.
+        a.setAttribute('href', link.href);
+
+        // Set the element's content to the value of the text property of the "link" object.
+        a.textContent = link.text;
+
+        // Append the new element to the subMenuEl.
+        subMenuEl.appendChild(a);
+    });
+}
