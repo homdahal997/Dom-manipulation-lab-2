@@ -27,8 +27,8 @@ topMenuEl.addEventListener("click", function(evt){
         return;
     }
     const linkClicked = evt.target;
-    topMenuLinks.forEach((link) => link.classList.remove('active'));
-    linkClicked.classList.toggle('active');
+    topMenuLinks.forEach((link) => link.classList.remove("active"));
+    linkClicked.classList.toggle("active");
     // ...
 });
 ```
