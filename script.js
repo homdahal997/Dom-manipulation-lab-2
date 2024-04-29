@@ -99,9 +99,12 @@ topMenuEl.addEventListener("click", function(evt){
 
     if(linkClickedObj && linkClickedObj.subLinks){
         subMenuEl.style.top = "100%";
+
         //subMenuEl.style.top = `${topMenuEl.offsetHeight}px`; // set top to the height of topMenuEl
         // build submenu
         buildSubmenu(linkClickedObj.subLinks);
+        // change position to relative for sub menus
+        subMenuEl.style.position = "relative";
     } else {
         // Set the CSS top property of subMenuEl to 0.
         subMenuEl.style.top = "0";
@@ -147,8 +150,7 @@ subMenuEl.addEventListener("click", function(evt) {
 
     //console.log(evt.target.textContent);
 
-    subMenuEl.style.top = "100%";
+    subMenuEl.style.top = "0";
     topMenuLinks.forEach((link) => link.classList.remove("active"));
-
     mainEl.innerHTML = `<h1>${evt.target.textContent}</h1>`;
 });
