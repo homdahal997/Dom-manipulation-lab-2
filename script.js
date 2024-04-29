@@ -99,6 +99,18 @@ topMenuEl.addEventListener("click", function(evt){
 
     if(linkClickedObj && linkClickedObj.subLinks){
         subMenuEl.style.top = "100%";
+        //subMenuEl.style.top = `${topMenuEl.offsetHeight}px`; // set top to the height of topMenuEl
+        // build submenu
+        buildSubmenu(linkClickedObj.subLinks);
+    } else {
+        // Set the CSS top property of subMenuEl to 0.
+        subMenuEl.style.top = "0";
+    }
+    //// Update the contents of mainEl within an <h1>
+    if(linkClicked.textContent === "about"){
+        mainEl.innerHTML = "<h1>About</h1>";
+    }else {
+        mainEl.innerHTML = `<h1>${evt.target.textContent}</h1>`;
     }
 
 
@@ -107,15 +119,15 @@ topMenuEl.addEventListener("click", function(evt){
 // Helper function to build submenu
 function buildSubmenu(subLinks) {
     // Clear the current contents of subMenuEl.
-    subMenuEl.innerHTML = '';
+    subMenuEl.innerHTML = "";
 
     // Iterate over the subLinks array
     subLinks.forEach(link => {
         // Create an <a> element.
-        const a = document.createElement('a');
+        const a = document.createElement("a");
 
         // Add an href attribute to the <a>, with the value set by the href property of the "link" object.
-        a.setAttribute('href', link.href);
+        a.setAttribute("href", link.href);
 
         // Set the element's content to the value of the text property of the "link" object.
         a.textContent = link.text;
@@ -124,3 +136,19 @@ function buildSubmenu(subLinks) {
         subMenuEl.appendChild(a);
     });
 }
+
+// Attach a delegated 'click' event listener to subMenuEl.
+subMenuEl.addEventListener("click", function(evt) {
+    evt.preventDefault();
+
+    if(!evt.target.matches("a")) {
+        return;
+    }
+
+    //console.log(evt.target.textContent);
+
+    subMenuEl.style.top = "100%";
+    topMenuLinks.forEach((link) => link.classList.remove("active"));
+
+    mainEl.innerHTML = `<h1>${evt.target.textContent}</h1>`;
+});
