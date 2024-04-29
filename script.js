@@ -147,9 +147,7 @@ subMenuEl.addEventListener("click", function(evt) {
     if(!evt.target.matches("a")) {
         return;
     }
-
     //console.log(evt.target.textContent);
-
     subMenuEl.style.top = "0";
     topMenuLinks.forEach((link) => link.classList.remove("active"));
     mainEl.innerHTML = `<h1>${evt.target.textContent}</h1>`;
